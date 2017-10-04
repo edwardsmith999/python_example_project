@@ -1,4 +1,4 @@
-from number_fns import square, cube
+from python_example_project.number_fns import square, cube
 import unittest
 
 class test_square(unittest.TestCase):

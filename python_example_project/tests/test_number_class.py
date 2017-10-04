@@ -1,4 +1,4 @@
-from number_class import Number
+from python_example_project.number_class import Number
 import unittest
 
 class test_number(unittest.TestCase):
