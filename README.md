@@ -20,3 +20,9 @@ by executing the following command from the top level directory
 ```bash
 py.test -v python_example_project
 ```
+
+## Advanced test examples
+Some examples of more advanced test features can be found in the
+[`stream_proc`](./python_example_project/stream_proc) submodule. This submodule demonstrates the
+basics of polymorphism in python; illustrates how to use mocking and test fixtures in tests; and 
+demonstrates the use of custom exception classes and testing for the raising of exceptions.
