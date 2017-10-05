@@ -1,8 +1,12 @@
 import os
 import tempfile
 import pytest
+import sys
 from datetime import datetime
-from mock import Mock, patch
+if sys.version_info > (3,):  # python 3 version of mock module is part of unittest
+    from unittest.mock import Mock, patch
+else:
+    from mock import Mock, patch
 
 import numpy as np
 
@@ -49,14 +53,14 @@ def test_check_file_stats(mock_fsstat_max, mock_fsstat_min):
 
         with pytest.raises(FileStatsError) as e:
             check_file_stats(fsstat)
-        assert e.value.message == 'Maximum value is too high!'
+        assert e.value.__str__() == 'Maximum value is too high!'
 
         mock_fsstat_min.return_value = -1
         mock_fsstat_max.return_value = 10
 
         with pytest.raises(FileStatsError) as e:
             check_file_stats(fsstat)
-        assert e.value.message == 'Minimum value is too low!'
+        assert e.value.__str__() == 'Minimum value is too low!'
 
         assert mock_fsstat_min.call_count == 3
         assert mock_fsstat_max.call_count == 2
