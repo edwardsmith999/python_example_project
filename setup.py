@@ -7,5 +7,8 @@ setup(
     name='python_example_project',
     version='0.2',
     description='Demonstrates basic python project structure, documentation and continuous integration',
-    packages=find_packages()
+    packages=find_packages(),
+    install_requires=[
+        'numpy>=1.13.1'
+    ]
 )
