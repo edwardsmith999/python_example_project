@@ -6,6 +6,10 @@ import numpy as np
 from python_example_project.number_class import Number
 
 
+class FileStatsError(Exception):
+    pass
+
+
 class StatsMixin(object):
     __metaclass__ = abc.ABCMeta
 
@@ -40,9 +44,28 @@ class FileStreamStats(FileStream, StatsMixin):
         self._data = []
 
     def data(self):
-        return np.array(self._data)
+        if self._data:
+            return np.array(self._data)
+        else:
+            raise FileStatsError('No data!')
 
     def next_number(self):
         new = super(FileStreamStats, self).next_number()
         self._data.append(new)
         return new
+
+
+def check_file_stats(fsstat):
+
+    try:
+        assert fsstat.min() > 0
+    except AssertionError:
+        raise FileStatsError('Minimum value is too low!')
+
+    try:
+        assert fsstat.max() < 100
+    except AssertionError:
+        raise FileStatsError('Maximum value is too high!')
+
+    return True
+
